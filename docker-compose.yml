@@ -3,3 +3,14 @@ services:
     build: 
       context: python/
       dockerfile: Dockerfile
+    networks:
+      - rabbitmq_network
+
+  rabbitmq:
+    image: "rabbitmq:latest"
+    networks:
+      - rabbitmq_network
+
+networks:
+  rabbitmq_network:
+    driver: bridge

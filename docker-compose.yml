@@ -7,8 +7,20 @@ services:
       - rabbitmq
     networks:
       - rabbitmq_network
+    restart: always
+  
+  golang:
+    build:
+      context: golang/
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+    networks:
+      - rabbitmq_network
+    restart: always
 
   rabbitmq:
+    attach: false
     image: "rabbitmq:latest"
     networks:
       - rabbitmq_network
@@ -18,7 +30,6 @@ services:
       timeout: 30s
       retries: 5
       start_period: 30s
-    restart: always
 
 networks:
   rabbitmq_network:

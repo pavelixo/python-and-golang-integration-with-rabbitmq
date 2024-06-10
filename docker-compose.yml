@@ -3,6 +3,8 @@ services:
     build: 
       context: python/
       dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
     networks:
       - rabbitmq_network
 
@@ -10,6 +12,13 @@ services:
     image: "rabbitmq:latest"
     networks:
       - rabbitmq_network
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 10s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    restart: always
 
 networks:
   rabbitmq_network:

@@ -1,7 +1,7 @@
 integrate Python and Golang applications using RabbitMQ as the messaging broker for communication between the applications.
 
 > Setup
-docker-compose up --build
+docker compose up
 
 > Description
 Python: producer
